@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Widget</class>
+ <widget class="QWidget" name="Widget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1200</width>
+    <height>800</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Widget</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="3" column="1" colspan="4">
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>2</number>
+     </property>
+     <widget class="LayerTr" name="pageTr">
+      <attribute name="title">
+       <string>批量翻譯</string>
+      </attribute>
+     </widget>
+     <widget class="LayerTest" name="pageTest">
+      <attribute name="title">
+       <string>測試</string>
+      </attribute>
+     </widget>
+     <widget class="LayerHelp" name="tab">
+      <attribute name="title">
+       <string>說明</string>
+      </attribute>
+     </widget>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>輸入api key:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="3">
+    <widget class="QPushButton" name="btnSet">
+     <property name="styleSheet">
+      <string notr="true">color: rgb(0, 170, 255);</string>
+     </property>
+     <property name="text">
+      <string>儲存KEY</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="2">
+    <widget class="QLineEdit" name="txKey"/>
+   </item>
+   <item row="1" column="4">
+    <widget class="QLabel" name="lb0">
+     <property name="text">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#008000;&quot;&gt;https://platform.openai.com/account/api-keys&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>LayerTest</class>
+   <extends>QWidget</extends>
+   <header>LayerTest.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>LayerTr</class>
+   <extends>QWidget</extends>
+   <header>LayerTr.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>LayerHelp</class>
+   <extends>QWidget</extends>
+   <header>LayerHelp.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
