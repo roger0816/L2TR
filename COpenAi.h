@@ -22,9 +22,8 @@ public:
 
     QStringList getModel();
 
-    void sendChat(QString prompt);
+    void sendChat(QString sId, QString prompt);
 
-    void sendAda(QString prompt);
 
     void callTextDavinci(QString prompt);
 
@@ -44,14 +43,12 @@ private :
 
 signals:
   //  void sendReply(QByteArray );
-    void replyChat(QByteArray ,QString sErrorStr);
-
-    void replyAda(QByteArray ,QString sErrorStr);
+    void replyChat(QString sId,QByteArray ,QString sErrorStr);
 
 
     void replyModel(QByteArray ,QString sErrorStr);
 
-    void replyData(int iApi,QByteArray data,QString sErrorStr);
+    void replyData(int iApi,QString sId,QByteArray data,QString sErrorStr);
 
 public slots:
     void onResponse(QNetworkReply *reply);

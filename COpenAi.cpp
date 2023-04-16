@@ -4,7 +4,7 @@ COpenAi::COpenAi(QObject *parent)
     : QObject{parent}
 {
     //OPENAI
-    //chencan
+    //chencan key
     //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
     //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
     //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
@@ -13,6 +13,8 @@ COpenAi::COpenAi(QObject *parent)
 
     connect(manager, &QNetworkAccessManager::finished, this, &COpenAi::onResponse);
 
+    //free key
+    //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
 
 }
 
@@ -35,7 +37,7 @@ QStringList COpenAi::getModel()
     request.setRawHeader("Content-Type","application/json");
     request.setRawHeader("Authorization",QString("Bearer %1").arg(m_apiKey).toUtf8());
 
-    request.setRawHeader("OpenAI-Organization","org-VTvCWe8s1dNHUJQbsLOcDUYy");
+   // request.setRawHeader("OpenAI-Organization","org-VTvCWe8s1dNHUJQbsLOcDUYy");
 
 
     QNetworkReply *reply = manager->get(request);
@@ -45,7 +47,7 @@ QStringList COpenAi::getModel()
     return listRe;
 }
 
-void COpenAi::sendChat(QString prompt)
+void COpenAi::sendChat(QString sId, QString prompt)
 {
 
 
@@ -58,7 +60,7 @@ void COpenAi::sendChat(QString prompt)
     header["Authorization"]=QString("Bearer %1").arg(m_apiKey).toUtf8();
     header["Content-Type"]="application/json";
 
-    header["OpenAI-Organization"]="org-VTvCWe8s1dNHUJQbsLOcDUYy";
+    //header["OpenAI-Organization"]="org-VTvCWe8s1dNHUJQbsLOcDUYy";
     // Set the request data (prompt)
     QJsonObject requestData;
     requestData.insert("model","gpt-3.5-turbo");
@@ -78,7 +80,7 @@ void COpenAi::sendChat(QString prompt)
 
     QVariantMap property;
     property["api"]=_API_Chat;
-
+    property["id"]=sId;
 
     doPost(url,header,requestData,property);
 
@@ -112,46 +114,6 @@ void COpenAi::sendChat(QString prompt)
     */
 }
 
-void COpenAi::sendAda(QString prompt)
-{
-
-
-//    curl https://api.openai.com/v1/completions \
-//      -H "Content-Type: application/json" \
-//      -H "Authorization: Bearer $OPENAI_API_KEY" \
-//      -d '{
-//        "model": "text-ada-001",
-//        "prompt": "Say this is a test",
-//        "max_tokens": 7,
-//        "temperature": 0
-//      }'
-
-
-
-    qDebug()<<"send data : "<<prompt;
-    QString url = "https://api.openai.com/v1/completions";
-
-    QVariantMap header;
-    header["Authorization"]=QString("Bearer %1").arg(m_apiKey).toUtf8();
-    header["Content-Type"]="application/json";
-
-    //header["OpenAI-Organization"]="org-VTvCWe8s1dNHUJQbsLOcDUYy";
-    // Set the request data (prompt)
-    QJsonObject requestData;
-    requestData.insert("model","text-ada-001");
-    requestData.insert("temperature",0);
-    requestData.insert("max_tokens",7);
-    requestData.insert("prompt",prompt);
-
-
-
-
-    QVariantMap property;
-    property["api"]=_API_Ada;
-
-
-    doPost(url,header,requestData,property);
-}
 
 void COpenAi::callTextDavinci(QString prompt)
 {
@@ -284,7 +246,7 @@ void COpenAi::onResponse(QNetworkReply *reply)
     if (reply->error() != QNetworkReply::NoError) {
         sErrorStr = reply->errorString();
         qDebug()<<"error : "<<sErrorStr;
-        return;
+       // return;
     }
 
     QString prompt = reply->property("prompt").toString();
@@ -292,22 +254,22 @@ void COpenAi::onResponse(QNetworkReply *reply)
     QJsonDocument doc = QJsonDocument::fromJson(responseData);
 
     int iType=reply->property("api").toInt();
-    qDebug()<<"AAAAA : emit "<<iType<<" , "<<responseData<<" , "<<sErrorStr;
-    emit replyData(iType,responseData,sErrorStr);
+    QString sId=reply->property("id").toString();
+
+
+    emit replyData(iType,sId,responseData,sErrorStr);
 
     if(iType==_API_Chat)
     {
-        emit replyChat(responseData,sErrorStr);
+
+        emit replyChat(sId,responseData,sErrorStr);
     }
     else if(iType==_API_Model)
     {
+
        // qDebug()<<"AAAA : "<<responseData.toStdString().c_str()<<" , "<<sErrorStr;
-         emit replyChat(responseData,sErrorStr);
+         emit replyChat(sId,responseData,sErrorStr);
     }
 
-    else if(iType==_API_Ada)
-    {
-       // qDebug()<<"AAAA : "<<responseData.toStdString().c_str()<<" , "<<sErrorStr;
-         emit replyAda(responseData,sErrorStr);
-    }
+
 }

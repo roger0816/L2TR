@@ -1,0 +1,103 @@
+/* 對應QPushButton的選擇器 */
+
+.style{
+
+
+QPushButton {
+background-color: #FFFFFF;
+color: #007AFF;
+padding: 5px;
+border: 1px solid #C0C0C0;
+font-size: 14px;
+border-radius:5px;
+}
+
+/* 對應QPushButton在滑鼠懸停時的選擇器 */
+QPushButton:hover {
+background-color: #F0F0F0;
+border: 1px solid #007AFF;
+}
+
+/* 對應QPushButton在被按下時的選擇器 */
+QPushButton:pressed {
+background-color: #D0D0D0;
+padding-left: 7px;
+padding-top: 7px;
+}
+
+QPushButton:checked {
+
+padding-left: 7px;
+padding-top: 7px;
+
+border: 1px solid #007AFF;
+}
+
+/* 對應QLineEdit的選擇器 */
+QLineEdit {
+background-color: #FFFFFF;
+color: #000000;
+padding: 5px;
+border: 1px solid #C0C0C0;
+font-size: 14px;
+}
+
+/* 對應QLineEdit在獲得焦點時的選擇器 */
+QLineEdit:focus {
+border: 1px solid #0078D7;
+}
+
+}
+
+.LeftMenu{
+QWidget{
+background-color: #7D8E95;
+
+}
+QPushButton{
+background-color: rgba(255, 255, 255,0);
+color: rgb(255, 255, 255);
+
+font: 700 20px "Microsoft JhengHei UI";
+border-radius:0px;
+border-bottom:1px solid #cccccc;
+border-top:1px solid #cccccc;
+min-width: 4em;
+min-height:1.2em;
+padding: 6px;
+color: rgb(255, 255, 255);
+}
+
+
+QPushButton:hover
+{
+
+background-color: #959595;
+border-style: outset;
+border-width: 2px;
+
+font: 800 24px "Microsoft JhengHei UI";
+
+}
+QPushButton:pressed {
+border-style: outset;
+border-width: 2px;
+
+background-color: #344648;
+}
+QPushButton:checked {
+background-color: #344648;
+
+border-style: outset;
+border-width: 0px;
+
+}
+
+QPushButton:disabled {
+border-style: outset;
+border-width: 0px;
+font: 600 20px "Microsoft JhengHei UI";
+color: rgb(122, 122, 122);
+}
+
+}

@@ -13,75 +13,197 @@
   <property name="windowTitle">
    <string>Widget</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="3" column="1" colspan="4">
-    <widget class="QTabWidget" name="tabWidget">
-     <property name="currentIndex">
-      <number>2</number>
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <item row="1" column="0" rowspan="2">
+    <widget class="QWidget" name="LeftMenu" native="true">
+     <property name="minimumSize">
+      <size>
+       <width>160</width>
+       <height>0</height>
+      </size>
      </property>
-     <widget class="LayerTr" name="pageTr">
-      <attribute name="title">
-       <string>批量翻譯</string>
-      </attribute>
-     </widget>
-     <widget class="LayerTest" name="pageTest">
-      <attribute name="title">
-       <string>測試</string>
-      </attribute>
-     </widget>
-     <widget class="LayerHelp" name="tab">
-      <attribute name="title">
-       <string>說明</string>
-      </attribute>
-     </widget>
-    </widget>
-   </item>
-   <item row="1" column="1">
-    <widget class="QLabel" name="label">
-     <property name="text">
-      <string>輸入api key:</string>
+     <property name="maximumSize">
+      <size>
+       <width>160</width>
+       <height>16777215</height>
+      </size>
      </property>
-    </widget>
-   </item>
-   <item row="1" column="3">
-    <widget class="QPushButton" name="btnSet">
      <property name="styleSheet">
-      <string notr="true">color: rgb(0, 170, 255);</string>
+      <string notr="true"/>
      </property>
-     <property name="text">
-      <string>儲存KEY</string>
-     </property>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <item row="0" column="0">
+       <widget class="QPushButton" name="btn0">
+        <property name="text">
+         <string>主頁面</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <spacer name="verticalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="2" column="0">
+       <widget class="QPushButton" name="btn2">
+        <property name="text">
+         <string>查表對照</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QPushButton" name="btn3">
+        <property name="text">
+         <string>設定</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QPushButton" name="btn1">
+        <property name="text">
+         <string> 翻譯html</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </item>
-   <item row="1" column="2">
-    <widget class="QLineEdit" name="txKey"/>
-   </item>
-   <item row="1" column="4">
-    <widget class="QLabel" name="lb0">
-     <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#008000;&quot;&gt;https://platform.openai.com/account/api-keys&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   <item row="2" column="1" colspan="2">
+    <widget class="QStackedWidget" name="stackedWidget">
+     <property name="styleSheet">
+      <string notr="true"/>
      </property>
+     <widget class="LayerHelp" name="pageMain"/>
+     <widget class="StageTr" name="pageTr"/>
+     <widget class="StageDictionary" name="pageDictionary"/>
+     <widget class="QWidget" name="pageSetting"/>
+    </widget>
+   </item>
+   <item row="0" column="0" colspan="3">
+    <widget class="QWidget" name="wTitle" native="true">
+     <property name="minimumSize">
+      <size>
+       <width>120</width>
+       <height>60</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">
+
+border-bottom: 1px solid #cccccc;
+
+background-color:#344648;
+background-color:#2d3e4e;
+</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_3">
+      <property name="leftMargin">
+       <number>10</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>10</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label">
+        <property name="styleSheet">
+         <string notr="true">color: #ffffff;
+font: 700 26px &quot;Microsoft JhengHei UI&quot;; </string>
+        </property>
+        <property name="text">
+         <string>L2TR</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </item>
   </layout>
  </widget>
  <customwidgets>
   <customwidget>
-   <class>LayerTest</class>
-   <extends>QWidget</extends>
-   <header>LayerTest.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>LayerTr</class>
-   <extends>QWidget</extends>
-   <header>LayerTr.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>LayerHelp</class>
    <extends>QWidget</extends>
    <header>LayerHelp.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>StageTr</class>
+   <extends>QWidget</extends>
+   <header>StageTr.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>StageDictionary</class>
+   <extends>QWidget</extends>
+   <header>StageDictionary.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

@@ -2,8 +2,13 @@
 #define WIDGET_H
 
 #include <QWidget>
+#include <QDebug>
 #include <QDesktopServices>
 #include <QVariantMap>
+#include <QButtonGroup>
+#include <QFile>
+#include <QPropertyAnimation>
+#include <QGraphicsOpacityEffect>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Widget; }
@@ -17,15 +22,19 @@ public:
     Widget(QWidget *parent = nullptr);
     ~Widget();
 
-private slots:
-    void on_lb0_linkActivated(const QString &link);
 
-    void on_btnSet_clicked();
 
-    void on_txKey_textChanged(const QString &arg1);
 
 private:
     Ui::Widget *ui;
+
+    QPropertyAnimation* m_animation;
+
+    QButtonGroup m_btns;
+private slots:
+    void slotChangePage(int iIdx);
+
+    void slotChangeKey(QString sKey,bool bSave);
 
 };
 #endif // WIDGET_H

@@ -12,25 +12,47 @@ UI_DIR =$$PWD/obj
 # In order to do so, uncomment the following line.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
+INCLUDEPATH+=$$PWD/stageTr \
+             $$PWD/stageDictionary
+
 SOURCES += \
     COpenAi.cpp \
-    LayerHelp.cpp \
-    LayerTest.cpp \
-    LayerTr.cpp \
+    Global.cpp \
+    LayerLogin.cpp \
+    stageDictionary/ItemNameDecode.cpp \
+    stageDictionary/LayerDictionary.cpp \
+    stageDictionary/StageDictionary.cpp \
+    stageTr/LayerHelp.cpp \
+    LayerSetting.cpp \
+    stageTr/LayerTest.cpp \
+    stageTr/LayerTr.cpp \
     main.cpp \
+    stageTr/StageTr.cpp \
     widget.cpp
 
 HEADERS += \
     COpenAi.h \
-    LayerHelp.h \
-    LayerTest.h \
-    LayerTr.h \
+    Global.h \
+    LayerLogin.h \
+    stageDictionary/ItemNameDecode.h \
+    stageDictionary/LayerDictionary.h \
+    stageDictionary/StageDictionary.h \
+    stageTr/LayerHelp.h \
+    LayerSetting.h \
+    stageTr/LayerTest.h \
+    stageTr/LayerTr.h \
+    stageTr/StageTr.h \
     widget.h
 
 FORMS += \
-    LayerHelp.ui \
-    LayerTest.ui \
-    LayerTr.ui \
+    LayerLogin.ui \
+    stageDictionary/LayerDictionary.ui \
+    stageDictionary/StageDictionary.ui \
+    stageTr/LayerHelp.ui \
+    LayerSetting.ui \
+    stageTr/LayerTest.ui \
+    stageTr/LayerTr.ui \
+    stageTr/StageTr.ui \
     widget.ui
 
 # Default rules for deployment.
@@ -58,3 +80,11 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 #INCLUDEPATH += $$PWD/libs/curl-8.0.1_4-win64-mingw/include
 #DEPENDPATH += $$PWD/libs/curl-8.0.1_4-win64-mingw/include
+
+RESOURCES += \
+    res/res.qrc
+
+DISTFILES += \
+    res/style.css
+
+
