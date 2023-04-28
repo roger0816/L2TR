@@ -56,6 +56,19 @@
           <number>0</number>
          </property>
          <item>
+          <widget class="QLabel" name="lbToken">
+           <property name="minimumSize">
+            <size>
+             <width>40</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
           <spacer name="horizontalSpacer_2">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
@@ -418,6 +431,26 @@ border-radius: 5px;
         <property name="text">
          <string/>
         </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="cbType">
+        <property name="maximumSize">
+         <size>
+          <width>80</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <item>
+         <property name="text">
+          <string>繁體中文</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>简体中文</string>
+         </property>
+        </item>
        </widget>
       </item>
       <item>

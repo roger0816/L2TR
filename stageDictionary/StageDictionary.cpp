@@ -7,6 +7,12 @@ StageDictionary::StageDictionary(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    m_btns.addButton(ui->btn0,0);
+
+    m_btns.addButton(ui->btn1,1);
+
+    m_btns.addButton(ui->btn2,2);
+
 }
 
 StageDictionary::~StageDictionary()

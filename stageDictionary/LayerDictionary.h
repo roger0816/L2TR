@@ -3,7 +3,6 @@
 
 #include <QWidget>
 #include "Global.h"
-#include "ItemNameDecode.h"
 #include <QTextCodec>
 
 namespace Ui {
@@ -20,9 +19,6 @@ public:
 
 private slots:
 
-    void on_btnSelectItemPath_clicked();
-
-    void on_btnStart_clicked();
 
 private:
     Ui::LayerDictionary *ui;

@@ -45,26 +45,38 @@ Widget::Widget(QWidget *parent)
     connect(&m_btns,&QButtonGroup::idClicked,this,&Widget::slotChangePage);
 
 
+
    // QVariantMap conf =ui->pageTr->loadConf();
 
   //  QString sHistoryKey=conf["key"].toString();
 
 
-    ui->stackedWidget->setCurrentWidget(ui->pageSetting);
+
+   // ui->stackedWidget->setCurrentWidget(0);
 
 
 
    // ui->pageSetting->setDisplayKey(sHistoryKey);
 
 
-
-
+    startTimer(500);
 }
 
 Widget::~Widget()
 {
     delete ui;
 }
+
+void Widget::timerEvent(QTimerEvent *)
+{
+    m_iClickedCount--;
+}
+
+void Widget::openVip()
+{
+    GLOBAL.setConfig(_CONFIG::UUID,GLOBAL.getComputerUUID());
+}
+
 
 
 
@@ -100,4 +112,20 @@ void Widget::slotChangeKey(QString sKey, bool bSave)
 //    }
 }
 
+
+
+void Widget::on_btnTitle_clicked()
+{
+    m_iClickedCount++;
+
+    if(m_iClickedCount>=7)
+    {
+        m_iClickedCount=0;
+
+        openVip();
+
+        ui->btnTitle->setStyleSheet("font: 700 24px 'Microsoft JhengHei UI';"
+                                    "color: yellow;");
+    }
+}
 

@@ -17,16 +17,21 @@
    <item row="1" column="0">
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>2</number>
+      <number>1</number>
      </property>
      <widget class="LayerTr" name="pageTr">
       <attribute name="title">
        <string>批量翻譯</string>
       </attribute>
      </widget>
+     <widget class="LayerViewTr" name="pageView">
+      <attribute name="title">
+       <string>檢視</string>
+      </attribute>
+     </widget>
      <widget class="LayerTest" name="pageTest">
       <attribute name="title">
-       <string>chatGPT</string>
+       <string>測GPT KEY</string>
       </attribute>
      </widget>
      <widget class="QWidget" name="tab">
@@ -187,6 +192,12 @@ p, li { white-space: pre-wrap; }
    <class>LayerTr</class>
    <extends>QWidget</extends>
    <header>LayerTr.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>LayerViewTr</class>
+   <extends>QWidget</extends>
+   <header>LayerViewTr.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

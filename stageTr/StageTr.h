@@ -29,6 +29,8 @@ private slots:
     void on_label_2_linkActivated(const QString &link);
 
 
+    void on_tabWidget_currentChanged(int index);
+
 private:
     Ui::StageTr *ui;
 };

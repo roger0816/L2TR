@@ -19,16 +19,16 @@ QVariant Global::config(QString sKey)
     //舊版定義遷移
     if(listKey.contains("key"))
     {
-       conf.setValue(_CONFIG::GPT_KEY,conf.value("key"));
-       conf.remove("key");
-       conf.sync();
+        conf.setValue(_CONFIG::GPT_KEY,conf.value("key"));
+        conf.remove("key");
+        conf.sync();
     }
 
     if(listKey.contains("path"))
     {
-       conf.setValue(_CONFIG::GPT_PATH,conf.value("path"));
-       conf.remove("path");
-       conf.sync();
+        conf.setValue(_CONFIG::GPT_PATH,conf.value("path"));
+        conf.remove("path");
+        conf.sync();
     }
     //
 
@@ -71,12 +71,29 @@ void Global::setConfig(QString sKey,QVariant value)
 
 Global &Global::Instance()
 {
-//    static Global global;
-//    return global;
+    //    static Global global;
+    //    return global;
 
     if(m_pInstance==nullptr)
         m_pInstance=new Global();
 
     return *m_pInstance;
+
+}
+
+QString Global::getComputerUUID()
+{
+
+
+    QProcess process;
+    process.start("wmic", QStringList() << "csproduct" << "get" << "UUID");
+    process.waitForFinished(-1);
+    QString output = process.readAllStandardOutput();
+    QStringList lines = output.split("\n", QString::SkipEmptyParts);
+    if (lines.count() < 2) {
+        return QString();
+    }
+    return lines.at(1).trimmed();
+
 
 }

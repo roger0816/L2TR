@@ -3,18 +3,19 @@
 #include <QApplication>
 #include <QMessageBox>
 #include <QDebug>
+#include "Global.h"
 #include <QFile>
 #include "LayerLogin.h"
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    bool bRoot = false;
+    bool vip = false;
 
     if(argc>=2)
     {
         if(QString(argv[1]).toLower()=="root")
-            bRoot =true;
+            vip =true;
     }
 
     QFile file(":/css/style.css");
@@ -34,10 +35,22 @@ int main(int argc, char *argv[])
     login.connect(&login,&LayerLogin::finished,&w,&Widget::show);
 
     QDateTime date=QDateTime::currentDateTimeUtc();
+
+
+    if(!vip)
+    {
+        QString sUuid=GLOBAL.config(_CONFIG::UUID).toString();
+
+        if(sUuid==GLOBAL.getComputerUUID())
+            vip=true;
+
+    }
+
+
     if(date.toString("yyyyMMdd")<"20260701")
     {
 
-        if(bRoot)
+        if(vip)
             w.show();
         else
             login.show();

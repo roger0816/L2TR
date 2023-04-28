@@ -7,12 +7,23 @@ LayerTr::LayerTr(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    m_gptCmd<<"html翻譯成繁體中文 : "<<"html翻成简体中文 : ";
+
     setWindowTitle("L2TR ");
+
+
 
     m_api.connect(&m_api,&COpenAi::replyData,this,&LayerTr::slotReply);
 
 
     setPath(GLOBAL.config(_CONFIG::GPT_PATH).toString());
+
+    QString sType = GLOBAL.config(_CONFIG::GPT_TYPE).toString();
+
+    if(sType.toLower().contains("cn"))
+        ui->cbType->setCurrentIndex(1);
+    else
+        ui->cbType->setCurrentIndex(0);
 
     m_rbs[0].addButton(ui->rbAuto,0);
 
@@ -193,7 +204,7 @@ void LayerTr::slotReply(int iType, QString sId, QByteArray data, QString sError)
         if(sError.contains("Error transferring") || sError.toLower().contains("bad request"))
         {
 
-             decodeFile(sOriFileName,m_sOriData,m_sPathUnCheck);
+            decodeFile(sOriFileName,m_sOriData,m_sPathUnCheck);
         }
 
         else if(sMessage.trimmed().length()>0)
@@ -250,9 +261,21 @@ void LayerTr::slotTimerout()
 
 void LayerTr::setPath(QString sPath)
 {
+
     ui->txPath->setText(sPath);
 
-    m_sOriRoot=ui->txPath->text().trimmed().replace("\\","/");
+    QString sRootPath =ui->txPath->text().trimmed().replace("\\","/");
+
+    bool bHasChange =false;
+
+    if(sRootPath!=m_sOriRoot)
+    {
+        bHasChange=true;
+           m_sOriRoot=sRootPath;
+    }
+
+
+    qDebug()<<"set path : "<<sPath<<" , change : "<<bHasChange;
 
     if(m_sOriRoot.right(1)=="/")
         m_sOriRoot.remove(m_sOriRoot.length()-1,1);
@@ -263,20 +286,26 @@ void LayerTr::setPath(QString sPath)
 
     QString sOutPath = QApplication::applicationDirPath()+"/output";
 
-
-
     m_sOutputRoot = sOutPath;
 
     ui->txOutPath->setText(m_sOutputRoot);
+
+    if(bHasChange)
+         emit changeDir(m_sOriRoot,m_sOutputRoot);
 }
 
 void LayerTr::copyHtml()
 {
-    QString sTmp=m_sPathUnDone;
+    foreach(QString v,TR_FILES)
+    {
+        QString sTmp=m_sPathUnDone;
 
-    QString sCmd = "echo D|xcopy /S /Y "+m_sOriRoot.replace("/","\\")+"\\"+TR_FILES+" "+sTmp.replace("/","\\");
-    qDebug()<<"cmd : "<<sCmd;
-    system(sCmd.toStdString().c_str());
+        QString sCmd = "echo D|xcopy /S /Y "+m_sOriRoot.replace("/","\\")+"\\"+v+" "+sTmp.replace("/","\\");
+        qDebug()<<"cmd : "<<sCmd;
+        system(sCmd.toStdString().c_str());
+    }
+
+
 
     //   sCmd = "xcopy /S /Y "+m_sOriPath.replace("/","\\")+"\\*.htm "+m_sOutputRoot.replace("/","\\")+"\\undo";
 
@@ -302,11 +331,6 @@ void LayerTr::searchDir(QString sDir)
 
             QDir dir;
 
-            //            dir.mkdir(m_sPathCheck+sTmp);
-
-            //            dir.mkdir(m_sPathUnCheck+sTmp);
-
-
             searchDir(info.filePath());
         }
         else
@@ -316,7 +340,6 @@ void LayerTr::searchDir(QString sDir)
             m_iTotal++;
 
             //  dir /s /a-d /b *.htm *.html | find /v /c ""
-
 
             QString tmp0 =info.absoluteFilePath();
 
@@ -368,7 +391,7 @@ void LayerTr::doTr(int iIdx)
 
         msg.resize(400,300);
 
-        msg.setText("找不到 *.htm 與 *.html");
+        msg.setText("找不到 *.htm 與 *.html \n1.請確認是否檔案已全部處理完\n2.來源路徑是否錯誤\n3.刪除output資料夾，重啟程式再試一次");
 
         msg.exec();
         return ;
@@ -400,17 +423,30 @@ void LayerTr::doTr(int iIdx)
 
         m_sOriData = read;
 
+        file.close();
+
         if(m_iIdx==0)
             updateTx();
-        m_api.sendChat(sFile,"html翻譯成繁體中文 : "+read);
 
-        //m_api.sendChat("html翻成简体中文 : "+read);
 
-        //m_api.callTextDavinci("翻譯成繁體中文,行數要對齊 : "+read);
-        ui->lbMsg->setText("處理中");
-        file.close();
-        //        m_timer.stop();
-        //        m_timer.start(30*1000);
+        if(m_sOriData.length()<=4096)
+        {
+            m_api.sendChat(sFile,m_gptCmd.at(ui->cbType->currentIndex())+read);
+
+
+            //m_api.callTextDavinci("翻譯成繁體中文,行數要對齊 : "+read);
+            ui->lbMsg->setText("處理中");
+        }
+        else
+        {
+
+            ui->lbMsg->setText(sFile+" 檔案太大，跳過");
+            decodeFile(sFile,m_sOriData,m_sPathUnCheck);
+
+
+        }
+
+
     }
     else
     {
@@ -435,6 +471,7 @@ void LayerTr::decodeFile(QString sUndoFileName, QString sData, QString sIntoDirP
 
     delFile(sUndoFileName);
 
+    emit signalRefreshView();
 
     doTr(++m_iIdx);
 
@@ -494,9 +531,6 @@ void LayerTr::saveFile(QString sFilePath, QString sData)
         QDir dir(info.absolutePath());
 
         QDir().mkpath(info.absolutePath());
-        qDebug()<<"mk path : "<<info.absolutePath();
-
-        qDebug()<<"AAAAAAAAAAAAAAAAAAAAAA"<<dir.exists();
 
         dir.mkpath(info.absolutePath());
 
@@ -681,5 +715,15 @@ void LayerTr::timerEvent(QTimerEvent *)
 void LayerTr::on_btnGoto_clicked()
 {
     QDesktopServices::openUrl(QUrl(ui->txOutPath->text()));
+}
+
+
+void LayerTr::on_cbType_currentIndexChanged(int index)
+{
+    if(ui->cbType->currentIndex()==1)
+        GLOBAL.setConfig(_CONFIG::GPT_TYPE,"cn");
+    else if(ui->cbType->currentIndex()==0)
+        GLOBAL.setConfig(_CONFIG::GPT_TYPE,"tw");
+
 }
 

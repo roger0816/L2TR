@@ -16,10 +16,16 @@ INCLUDEPATH+=$$PWD/stageTr \
              $$PWD/stageDictionary
 
 SOURCES += \
+    CFileReader.cpp \
     COpenAi.cpp \
     Global.cpp \
     LayerLogin.cpp \
+    StageAbout.cpp \
+    stageDictionary/CDecodeXml.cpp \
+    stageDictionary/CMergeXml.cpp \
     stageDictionary/ItemNameDecode.cpp \
+    stageDictionary/LayerDcItem.cpp \
+    stageDictionary/LayerDecodeTxt.cpp \
     stageDictionary/LayerDictionary.cpp \
     stageDictionary/StageDictionary.cpp \
     stageTr/LayerHelp.cpp \
@@ -27,31 +33,46 @@ SOURCES += \
     stageTr/LayerTest.cpp \
     stageTr/LayerTr.cpp \
     main.cpp \
+    stageTr/LayerTrDetail.cpp \
+    stageTr/LayerViewTr.cpp \
     stageTr/StageTr.cpp \
     widget.cpp
 
 HEADERS += \
+    CFileReader.h \
     COpenAi.h \
     Global.h \
     LayerLogin.h \
+    StageAbout.h \
+    stageDictionary/CDecodeXml.h \
+    stageDictionary/CMergeXml.h \
     stageDictionary/ItemNameDecode.h \
+    stageDictionary/LayerDcItem.h \
+    stageDictionary/LayerDecodeTxt.h \
     stageDictionary/LayerDictionary.h \
     stageDictionary/StageDictionary.h \
     stageTr/LayerHelp.h \
     LayerSetting.h \
     stageTr/LayerTest.h \
     stageTr/LayerTr.h \
+    stageTr/LayerTrDetail.h \
+    stageTr/LayerViewTr.h \
     stageTr/StageTr.h \
     widget.h
 
 FORMS += \
     LayerLogin.ui \
+    StageAbout.ui \
+    stageDictionary/LayerDcItem.ui \
+    stageDictionary/LayerDecodeTxt.ui \
     stageDictionary/LayerDictionary.ui \
     stageDictionary/StageDictionary.ui \
     stageTr/LayerHelp.ui \
     LayerSetting.ui \
     stageTr/LayerTest.ui \
     stageTr/LayerTr.ui \
+    stageTr/LayerTrDetail.ui \
+    stageTr/LayerViewTr.ui \
     stageTr/StageTr.ui \
     widget.ui
 

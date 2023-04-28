@@ -94,7 +94,7 @@
       <item row="2" column="0">
        <widget class="QPushButton" name="btn2">
         <property name="text">
-         <string>查表對照</string>
+         <string>對照xml</string>
         </property>
         <property name="checkable">
          <bool>true</bool>
@@ -104,7 +104,7 @@
       <item row="4" column="0">
        <widget class="QPushButton" name="btn3">
         <property name="text">
-         <string>設定</string>
+         <string>關於</string>
         </property>
         <property name="checkable">
          <bool>true</bool>
@@ -132,10 +132,10 @@
      <property name="styleSheet">
       <string notr="true"/>
      </property>
-     <widget class="LayerHelp" name="pageMain"/>
+     <widget class="StageAbout" name="pageMain"/>
      <widget class="StageTr" name="pageTr"/>
      <widget class="StageDictionary" name="pageDictionary"/>
-     <widget class="QWidget" name="pageSetting"/>
+     <widget class="QWidget" name="pageAbout"/>
     </widget>
    </item>
    <item row="0" column="0" colspan="3">
@@ -157,28 +157,37 @@ background-color:#2d3e4e;
      </property>
      <layout class="QGridLayout" name="gridLayout_3">
       <property name="leftMargin">
-       <number>10</number>
+       <number>0</number>
       </property>
       <property name="topMargin">
        <number>0</number>
       </property>
       <property name="rightMargin">
-       <number>10</number>
+       <number>0</number>
       </property>
       <property name="bottomMargin">
        <number>0</number>
       </property>
       <item row="0" column="0">
-       <widget class="QLabel" name="label">
+       <widget class="QPushButton" name="btnTitle">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="focusPolicy">
+         <enum>Qt::NoFocus</enum>
+        </property>
         <property name="styleSheet">
-         <string notr="true">color: #ffffff;
-font: 700 26px &quot;Microsoft JhengHei UI&quot;; </string>
+         <string notr="true">font: 700 22px &quot;Microsoft JhengHei UI&quot;;
+color: rgb(255, 255, 255);</string>
         </property>
         <property name="text">
          <string>L2TR</string>
         </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
+        <property name="flat">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
@@ -189,12 +198,6 @@ font: 700 26px &quot;Microsoft JhengHei UI&quot;; </string>
  </widget>
  <customwidgets>
   <customwidget>
-   <class>LayerHelp</class>
-   <extends>QWidget</extends>
-   <header>LayerHelp.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>StageTr</class>
    <extends>QWidget</extends>
    <header>StageTr.h</header>
@@ -204,6 +207,12 @@ font: 700 26px &quot;Microsoft JhengHei UI&quot;; </string>
    <class>StageDictionary</class>
    <extends>QWidget</extends>
    <header>StageDictionary.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>StageAbout</class>
+   <extends>QWidget</extends>
+   <header>StageAbout.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

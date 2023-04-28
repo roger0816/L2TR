@@ -44,7 +44,7 @@ void LayerLogin::rollIn()
 
     // 创建动画对象
     QPropertyAnimation* animation = new QPropertyAnimation(opacityEffect, "opacity");
-    animation->setDuration(2000); // 设置动画持续时间为500毫秒
+    animation->setDuration(3000); // 设置动画持续时间为500毫秒
     animation->setStartValue(0.0); // 设置起始值为1.0（完全不透明）
     animation->setEndValue(1.0); // 设置结束值为0.0（完全透明）
 

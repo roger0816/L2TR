@@ -5,7 +5,12 @@ StageTr::StageTr(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::StageTr)
 {
+
+
     ui->setupUi(this);
+
+        connect(ui->pageTr,&LayerTr::signalRefreshView,ui->pageView,&LayerViewTr::refresh);
+
     ui->tabWidget->setCurrentIndex(0);
     QString sKey=GLOBAL.config("GPT/key").toString();
     ui->txKey->setText(sKey);
@@ -14,6 +19,10 @@ StageTr::StageTr(QWidget *parent) :
     {
         ui->tabWidget->setCurrentIndex(2);
     }
+
+    connect(ui->pageTr,&LayerTr::changeDir,ui->pageView,&LayerViewTr::slotScan);
+
+    ui->pageView->slotScan(ui->pageTr->m_sOriRoot,ui->pageTr->m_sOutputRoot);
 
 }
 
@@ -62,4 +71,13 @@ void StageTr::on_label_2_linkActivated(const QString &link)
     QDesktopServices::openUrl(QUrl(slink));
 }
 
+
+
+void StageTr::on_tabWidget_currentChanged(int index)
+{
+    if(index==1)
+    {
+        ui->pageView->refresh();
+    }
+}
 

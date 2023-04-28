@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QFileDialog>
 #include <QDebug>
+#include <QButtonGroup>
 
 namespace Ui {
 class StageDictionary;
@@ -21,6 +22,8 @@ private slots:
 
 private:
     Ui::StageDictionary *ui;
+
+    QButtonGroup m_btns;
 };
 
 #endif // STAGEDICTIONARY_H

@@ -19,7 +19,7 @@
 #include "COpenAi.h"
 #include "Global.h"
 
-static QString TR_FILES="*.htm*";
+static QStringList TR_FILES={"*.htm*","*.xml"};
 
 namespace Ui {
 class LayerTr;
@@ -35,6 +35,9 @@ public:
 
     QVariantMap loadConf();
 
+    QString m_sOriRoot;
+
+    QString m_sOutputRoot;
 
 
       COpenAi m_api;
@@ -61,16 +64,15 @@ private slots:
 
     void on_btnGoto_clicked();
 
+    void on_cbType_currentIndexChanged(int index);
+
 private:
     Ui::LayerTr *ui;
 
     void timerEvent(QTimerEvent *) override;
 
+    QStringList m_gptCmd;
 
-
-    QString m_sOriRoot;
-
-    QString m_sOutputRoot;
 
 
     QString m_sPathUnDone;
@@ -140,6 +142,11 @@ private:
 
 
     bool m_bRun= false;
+
+signals:
+    void changeDir(QString sTargetDir,QString sOutDir);
+
+    void signalRefreshView();
 };
 
 #endif // LAYERTR_H
